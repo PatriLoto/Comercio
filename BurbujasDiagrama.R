@@ -51,8 +51,24 @@ View(totalImportaHProducto)
 ranking <- totalImportaHProducto%>%filter(codOrigen =="arg" & anio =="2017")%>% arrange(desc(importa))
 View(ranking)
 
-rankingproductos <-ranking %>% group_by(nombreProducto)%>% summarize(totalXPro = sum(importa)) %>% arrange(desc(importa))
+#rankingproductos <-ranking %>% group_by(nombreProducto)%>% summarize(totalXPro = sum(importa)) %>% arrange(desc(importa))
+#View(rankingproductos) 
+
+
+rankingproductos <-ranking %>% select(- anio)%>% group_by(nombreProducto)%>% distinct() %>% arrange(desc(importa))
 View(rankingproductos) 
+
+
+anime_scores %>% 
+  arrange(rank) %>% 
+  slice(1:20) %>% 
+  ggplot(aes(reorder(title, score), score, colour = title, size = log(scored_by))) + 
+  geom_point(show.legend = F) + 
+  coord_flip() + 
+  labs(title = "Top 20 Anime By Score on MyAnimeList.net",
+       subtitle = "Size of dots indicate the credibility of an anime score",
+       x = "",
+       y = "Score (1 To 10)")
 
 
 totalExportaH<-comercioHispano%>%group_by(anio, codOrigen, paisOrigen, codigoDestino, paisDestino)%>% filter(codOrigen!=codigoDestino)%>% summarize(exporta=sum(valorExportado))%>% arrange(anio, importa)
