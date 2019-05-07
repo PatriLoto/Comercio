@@ -160,49 +160,6 @@ ranking %>%arrange(desc(importaXP))%>% select(0:10)
     labs(title = 'Year: {frame_time}', x = 'GDP per capita', y = 'life expectancy') +
     transition_time(year) +
     ease_aes('linear')
-#bcd8af
-2
-#406662
-3
-#a1aafb
-4
-
-5
-#a8c380
-6
-#8abdb6
-7
-#ede788
-8
-#a17cb0
-9
-#d05555
-10
-#bf3251
-11
-#5c57d9
-12
-#74c0e2
-13
-#4d6fd0
-14
-#549e95
-15
-#993f7b
-16
-#dc8e7a
-17
-#d6c650
-18
-#635b56
-19
-#872a41
-20
-#7454a6
-21
-#7485aa
-22
-#1c26b3
 
 #productos más importados
 
@@ -228,23 +185,8 @@ anime_scores %>%
 totalExportaH<-comercioHispano%>%group_by(anio, codOrigen, paisOrigen, codigoDestino, paisDestino, nombreProducto)%>% summarize(exporta=sum(valorExportado))%>% filter(exporta!=0)%>% arrange(desc(exporta))
 View(totalExportaH)
 
-
-
-
 rankingproductos <-ranking %>% select(- anio)%>% group_by(nombreProducto)%>% distinct() %>% arrange(desc(importa))
-View(rankingproductos) 
-
-
-anime_scores %>% 
-  arrange(rank) %>% 
-  slice(1:20) %>% 
-  ggplot(aes(reorder(title, score), score, colour = title, size = log(scored_by))) + 
-  geom_point(show.legend = F) + 
-  coord_flip() + 
-  labs(title = "Top 20 Anime By Score on MyAnimeList.net",
-       subtitle = "Size of dots indicate the credibility of an anime score",
-       x = "",
-       y = "Score (1 To 10)")
+View(rankingproductos)
 
 
 totalExportaH<-comercioHispano%>%group_by(anio, codOrigen, paisOrigen, codigoDestino, paisDestino)%>% filter(codOrigen!=codigoDestino)%>% summarize(exporta=sum(valorExportado))%>% arrange(anio, importa)
