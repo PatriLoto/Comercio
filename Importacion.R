@@ -28,10 +28,6 @@ library(extrafont)
 # se debe instalar la fuente en wintendo
 # font_import(paths = "R/2019/2019-04-17/")
 loadfonts(device = "win")
-
-FUENTE <- "Game of Thrones"
-FUENTE2 <- "Roboto Condensed"
-
 #-------------------------------------------------------------------------------
 # Ideas de análisis con el dataset de #DatosDeMiercoles
 
@@ -124,40 +120,33 @@ ggplot(rankingMundial10, aes(anio, importaMU, size = importaMU, colour = nombreP
   shadow_wake(wake_length = 0.1)
 
 #-------------------------------------------------------------------------------
-#FACET WRAP ESTATICO - Paleta: viridis - se puede PUBLICAR
+# FACET WRAP ESTÁTICO con Paleta PassionFruit de @johannesbjork  -  PUBLICADO
 #-------------------------------------------------------------------------------
-ggplot(rankingMundial10, aes(anio, importaMU, size = importaMU, colour = nombreProducto)) +
-  geom_point(alpha = 0.7, show.legend = F) +
-  scale_colour_manual(values = ranking$colorProducto) +
-  #cale_colour_manual(values = p) +
-  scale_color_viridis_d()+
-  scale_size(range = c(2, 12)) +
+  #Paleta PassionFruit de @johannesbjork 
+  p<-lacroix_palette("PassionFruit", n = 10, type = "continuous")
+  
+  ggplot(rankingMundial10, aes(anio, importaMU, size = importaMU, colour = nombreProducto))+
+  geom_point(show.legend = F)+
+  scale_colour_manual(values = p)+
+  scale_size(range = c(2, 12))+
   theme_set(theme_minimal())+
-  #theme_set(theme_gray())+
-  #scale_x_log10() +
-  facet_wrap(~nombreProducto) +
-  labs(title = "Evolución de los productos importados por Argentina \n a nivel Mundial en el período 2013-2017 ", #Año: {round(frame_time,0)}
+  labs(title = "Evolución de los productos importados por Argentina \n a nivel Mundial en el período 2013-2017 ", 
        x = 'Año', 
        y = 'Valor de importación en $',
        caption="#DatosDeMiercoles por Patricia Loto") +
   theme(axis.text.x =element_text(angle= 60, vjust = 1.5, hjust=1.4, size = 8),
         axis.text.y =element_text(vjust = 2, hjust=1.4, size = 8),
-                                  plot.title = element_text(family="Verdana",
-                                  size=rel(1),        
-                                  vjust=2,
-                                  hjust=0.5,
-                                  position_identity(center),   
-                                  face="bold",       
+        plot.title = element_text(family="Verdana", size=rel(1), vjust=2,hjust=0.5,position_identity(center),face="bold",       
                                   color="black",     
                                   lineheight=1.2),
-        plot.caption = element_text(color = "maroon", face = "bold")) 
-         # + scale_x_continuous(labels=dollar_format(prefix="$")) 
-         # theme_elegante())
-  # Here comes the gganimate specific bits
-  transition_time(anio) +
-  #shadow_mark(alpha = 0.7, size = 0.7)+           #DEJA LAS MARCAS
-  shadow_wake(wake_length = 0.3)
-
+        plot.caption = element_text(color = "maroon", face = "bold"),
+        legend.position = "none",
+        panel.border = element_blank(),
+        panel.background = element_blank(),
+        panel.grid = element_blank(),
+        rect = element_rect(fill = "black", color = "black"),
+        text = element_text(family = "Verdana", colour = "white", size = 12)) +
+  facet_wrap(~nombreProducto)
 #-------------------------------------------------------------------------------
 #FACET WRAP ANIMACIÓN - Paleta: PassionFruit PUBLICAR
 #-------------------------------------------------------------------------------
@@ -168,7 +157,6 @@ ggplot(rankingMundial10, aes(anio, importaMU, size = importaMU, colour = nombreP
   #scale_color_viridis_d()+
   scale_size(range = c(2, 12)) +
   theme_set(theme_minimal())+
-  #theme_set(theme_gray())+
   #scale_x_log10() +
   facet_wrap(~nombreProducto) +
   labs(title = "Evolución de los productos importados por Argentina \n a nivel Mundial en el período 2013-2017 ", #Año: {round(frame_time,0)}
