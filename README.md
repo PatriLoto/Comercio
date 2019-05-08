@@ -8,8 +8,8 @@ En el repositorio se encuentra el código y algunos de los gráficos generados. 
 * gganimate 
 * ggthemes, entre otros. 
 ## Primer análisis: 
-a- ¿Cuáles son los productos que más importa Argentina a nivel regional? --> Top ten de productos más importados por Argentina a nivel regional.
-b- ¿Y cuáles los que más importa a nivel mundial? --> Top ten de productos más importados por Argentina a nivel mundial.
+- A. ¿Cuáles son los productos que más importa Argentina a nivel regional? --> Top ten de productos más importados por Argentina a nivel regional.
+- B.¿Y cuáles los que más importa a nivel mundial? --> Top ten de productos más importados por Argentina a nivel mundial.
 
 ## Segundo Análisis: 
 - De esos 10 productos con mayor importación, cuál es la evolución desde 2013 a 2017. 
