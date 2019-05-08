@@ -145,10 +145,6 @@ ranking %>%arrange(desc(importaXP))%>% select(0:10)
     ease_aes('linear')+
     shadow_mark(alpha = 0.4, size = 2)
   
-  
-  
-  
-  
  #------------------------------------------------------------------------------   
   ggplot(rankingTodos, aes(nombreProducto, im, size = pop, colour = country)) +
     geom_point(alpha = 0.7, show.legend = FALSE) +
@@ -206,10 +202,7 @@ View(paisesHispanoImporta)
 paisesHispanoExporta <-datoscomercio %>% group_by(anio, codOrigen)%>% summarize(exporta=sum(valorExportado))%>% arrange(exporta)
 View(paisesHispanoExporta)
 
-
-
-
-
+#Para Probar
 #-------------------------------------------------------------------------------
 # D - Dendrogram, similar to the circleparcke
 #-------------------------------------------------------------------------------
