@@ -1,0 +1,23 @@
+codigoProducto,nombreProducto,colorProducto
+01,Productos Animales,#74c0e2
+02,Productos Vegetales,#406662
+03,Productos de Composicion Vegetal y Animal,#549e95
+04,Alimentos,#8abdb6
+05,Productos Minerales,#bcd8af
+06,Productos Quimicos,#a8c380
+07,Plasticos y Gomas,#ede788
+08,Pieles de Animales,#d6c650
+09,Productos de Madera,#dc8e7a
+10,Articulos de Papel,#d05555
+11,Textiles,#bf3251
+12,Calzado y Gorras,#872a41
+13,Piedras y Cristales,#993f7b
+14,Metales Preciosos,#7454a6
+15,Metales,#a17cb0
+16,Maquinaria,#d1a1bc
+17,Transporte,#a1aafb
+18,Instrumentos,#5c57d9
+19,Armas,#1c26b3
+20,Miscelanea,#4d6fd0
+21,Arte y Antiguedades,#7485aa
+22,Sin Especificar,#635b56
