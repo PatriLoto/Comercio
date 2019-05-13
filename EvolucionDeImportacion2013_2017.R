@@ -1,47 +1,28 @@
 # Resource: https://www.r-graph-gallery.com/
-install.packages(c("devtools", "tidyverse", "lubridate","janitor", "data.tree","circlepackeR"))
-install.packages("here")
-install.packages("gganimate")
-install.packages("gifski")
-install.packages("png")
+install.packages(c("devtools", "tidyverse", "lubridate","janitor", "gifski","gganimate", "png"))
+
 #Paleta LaCroixColoR (beta)
 devtools::install_github("johannesbjork/LaCroixColoR")
 install.packages("extrafont")
-#library(readxl)
 
-#library(ggplot2)
 library(devtools)
 library(readr)
 library(tidyverse)
 library(janitor)
 library(lubridate)
-library(data.tree)
 library(gganimate)
 library(gifski)
 library(png)
 library(LaCroixColoR)
 #fuentes
 library(extrafont)
-#library(dplyr)
+
 
 # se debe instalar la fuente en wintendo
 # font_import(paths = "R/2019/2019-04-17/")
 loadfonts(device = "win")
 
-#FUENTE <- "Game of Thrones"
-FUENTE2 <- "Roboto Condensed"
-
 #-------------------------------------------------------------------------------
-# Ideas de análisis con el dataset de #DatosDeMiercoles
-
-# A- Voy a utilizar las burbujas para representar cada categoria con sus subcategorias o componentes. Paquete: data.tree o circlepackeR.
-# B- Voy a utilizar el diagrama chord diagram para visibilizar las relaciones recíprocas. Paquete: chorddiag
-# C- Voy a utilizar leaflet para armar un mapa básico mostrando por área cantidad de importaciones/exportaciones, seleccionando regiones. Paquete:leaflet
-# D - Voy a utilizar Dendrogram, para mostrar jerarquia
-#-------------------------------------------------------------------------------
-#para pasar los nombres de columnas a minúsculas
-#rename_all(str_to_lower) 
-
 #esto sería una buena práctica
 data_url <- "https://raw.githubusercontent.com/cienciadedatos/datos-de-miercoles/master/datos/2019/2019-05-01/comercio_hispanoamerica_mundo_agregado.csv"
 datoscomercio <- readr::read_csv(data_url, col_types = cols())
@@ -54,13 +35,6 @@ View(datoscomercio)
 colnames(datoscomercio) <-c("anio","codOrigen","codigoDestino","paisOrigen", "paisDestino", "codigoProducto", "nombreProducto", "colorProducto", "valorExportado", "valorImportado", "origenHispanoamerica","destinoHisponoamerica")
 View(datoscomercio)
 
-#cuáles son los productos importados/exportados
-productos <- datoscomercio%>%select(codigoProducto, nombreProducto, colorProducto)%>%arrange (codigoProducto)%>%distinct()
-View(productos)
-
-productosC <- janitor::clean_names(productos)
-write_csv(productos, 'productos.csv')
-View(productosC)
 #-------------------------------------------------------------------------
 #07/05/2019
 #--------------------------------------------------------------------
@@ -74,7 +48,7 @@ View(totalImportaMundial)
 rankingMundial <- totalImportaMundial%>%filter(codOrigen =="arg")%>% group_by(nombreProducto, colorProducto, anio)%>% summarize(importaMU=sum(importa))%>% arrange(desc(importaMU))
 View(rankingMundial)
 
-rankingMundial10 <- rankingMundial%>% filter (nombreProducto %in% c("Maquinaria","Transporte","Productos Químicos",                                                                   "Productos Minerales", "Metales", "Plásticos y Gomas", "Instrumentos", "Textiles", "Productos Vegetales","Miscelánea"))
+rankingMundial10 <- rankingMundial%>% filter (nombreProducto %in% c("Maquinaria","Transporte","Productos Químicos","Productos Minerales", "Metales", "Plásticos y Gomas", "Instrumentos", "Textiles", "Productos Vegetales","Miscelánea"))
 View(rankingMundial10)
 
 
@@ -409,36 +383,3 @@ ggplot(rankingMundial10, aes(anio, importaMU, size = importaMU, colour = nombreP
   #ease_aes('linear')+
   #view_follow(fixed_y = TRUE)
 
-#---------------------------------------------------------------------------------------------------------
-#filtro por países de hispanoamerica, queda excluido brasil
-#---------------------------------------------------------------------------------------------------------
-comercioHispano <-datoscomercio %>%filter(origenHispanoamerica=="1" & destinoHisponoamerica=="1"& (codOrigen!=codigoDestino)) %>% select(c(-origenHispanoamerica, -destinoHisponoamerica))%>% distinct()
-View(comercioHispano)
-#---------------------------------------------------------------------------------------------------------
-#filtro con origen Argentina y destino Brasil 
-comercioArgBra <-datoscomercio %>%filter((codOrigen=='arg' & codigoDestino== 'bra')) %>% select(c(-origenHispanoamerica, -destinoHisponoamerica))%>% distinct()
-View(comercioArgBra)
-#---------------------------------------------------------------------------------------------------------
-# IMPORTACIÓN
-# total de importacion por año, paisorigen, paisdestino y producto OK
-totalImportaH<-comercioHispano%>% filter(codOrigen =='arg')%>% group_by(anio, codOrigen, paisOrigen, codigoDestino, paisDestino, nombreProducto, colorProducto)%>% summarize(importa=sum(valorImportado))%>% arrange(desc(importa))
-View(totalImportaH)
-#filtro los valores en cero de importacion
-totalImportadoHispano <-totalImportaH%>% filter(importa!=0)%>% arrange(desc(importa))
-View(totalImportadoHispano)
-tail(totalImportadoHispano)
-
-#Ranking de productos más importados por Argentina en hispanoamerica en el año 2017 
-rankingTodos <- totalImportadoHispano%>%filter(codOrigen =="arg")%>% group_by(nombreProducto, colorProducto, anio)%>% summarize(importaXP=sum(importa))%>% arrange(desc(importaXP))
-View(rankingTodos)
-
-ranking <- totalImportadoHispano%>%filter(codOrigen =="arg" & anio =="2017")%>% group_by(nombreProducto, colorProducto)%>% summarize(importaXP=sum(importa))%>% arrange(desc(importaXP))
-View(ranking)
-
-#productos con mayor importación
-top10 <-ranking %>% arrange(desc(importaXP))%>% filter(importaXP > 105645400)
-View(top10)
-color <- ranking$colorProducto
-View(color)
-ranking %>%arrange(desc(importaXP))%>% select(0:10) 
-#---------------------------------------------------------------------------------------------------------
