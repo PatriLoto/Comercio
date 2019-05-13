@@ -11,12 +11,12 @@ library(png)
 library(ggthemes)
 
 #-------------------------------------------------------------------------------
-# Ideas de análisis con el dataset de #DatosDeMiercoles
+# Algunas Ideas de análisis con el dataset de #DatosDeMiercoles
 
-# A- Voy a utilizar las burbujas para representar cada categoria con sus subcategorias o componentes. Paquete: data.tree o circlepackeR.
-# B- Voy a utilizar el diagrama chord diagram para visibilizar las relaciones recíprocas. Paquete: chorddiag
-# C- Voy a utilizar leaflet para armar un mapa básico mostrando por área cantidad de importaciones/exportaciones, seleccionando regiones. Paquete:leaflet
-# D - Voy a utilizar Dendrogram, para mostrar jerarquia
+# A- Utilizar las burbujas para representar cada categoria con sus subcategorias o componentes. Paquete: data.tree o circlepackeR.
+# B- Utilizar el diagrama chord diagram para visibilizar las relaciones recíprocas. Paquete: chorddiag
+# C- Utilizar leaflet para armar un mapa básico mostrando por área cantidad de importaciones/exportaciones, seleccionando regiones. Paquete:leaflet
+# D- Utilizar Dendrogram, para mostrar jerarquia
 #-------------------------------------------------------------------------------
 #esto sería una buena práctica
 data_url <- "https://raw.githubusercontent.com/cienciadedatos/datos-de-miercoles/master/datos/2019/2019-05-01/comercio_hispanoamerica_mundo_agregado.csv"
