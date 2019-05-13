@@ -12,4 +12,4 @@ En el repositorio se encuentra el código y algunos de los gráficos generados. 
 - B.¿Y cuáles los que más importa a nivel mundial? --> Top ten de productos más importados por Argentina a nivel mundial.
 
 ## Segundo Análisis: 
-- De esos 10 productos con mayor importación, me interesaba conocer la evolución de dichos productos desde 2013 a 2017. 
+- De los anteriores 10 productos con mayor importación, me interesaba conocer la evolución de dichos productos desde 2013 a 2017. 
