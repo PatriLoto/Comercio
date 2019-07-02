@@ -101,7 +101,8 @@ ggplot(top10, aes(reorder(nombreProducto, importaXP), importaXP, size =(importaX
 #------------------------------------------------------------------------------   
 #cambiar lo valores del gráfico por los de exportación
 
-#primer gráfico GGANIMATE con una paleta más llamativa  ggplot(top10, aes(reorder(nombreProducto, importaXP), importaXP, size =(importaXP))) + 
+#primer gráfico GGANIMATE con una paleta más llamativa  
+ggplot(top10, aes(reorder(nombreProducto, importaXP), importaXP, size =(importaXP))) + 
 #geom_point(show.legend = F) + 
 geom_col(aes(fill=nombreProducto)) +
   #scale_fill_manual(values =  ranking$colorProducto) +
